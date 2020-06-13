@@ -1,4 +1,5 @@
 /*
+更新时间: 2020-06-08 20:45
 
 赞赏:中青邀请码`46308484`,农妇山泉 -> 有点咸，万分感谢
 
@@ -150,8 +151,14 @@ function sign() {
           signresult = `【签到信息】重复`
           detail= ``
          }
+        else if(signres.status == 2){
+         signresult = `签到失败，Cookie已失效‼️`
+         detail= ``
+         sy.msg(CookieName,signresult,detail)
+         return
+         }
+       resolve()
        })
-    resolve()
      })
   }
       
