@@ -75,6 +75,7 @@ async function all()
   await toRead();
   await lookVideo();
   await openApp();
+  await shareApp();
   await StepsTotal();
   await StepsTotal2();
   await RednumCheck();
@@ -234,7 +235,7 @@ return new Promise((resolve, reject) => {
     body: `redpack_type=free_redpack&activity_id=${RedID}`
   }
    sy.post(openUrl, (error, response, data) => {
-    sy.log(`${cookieName}每日开启- data: ${data}`)
+    if(logs)sy.log(`${cookieName}每日开启- data: ${data}`)
       let opcash = JSON.parse(data)
       if(opcash.data.award.num){
        redpackres = `【每日开启】到账`+opcash.data.award.num/100+` 元 🌷\n` 
@@ -243,7 +244,19 @@ return new Promise((resolve, reject) => {
     resolve()
    })
 }
-
+function shareApp() {
+   ID = signurlVal.match(/devid=[a-zA-Z0-9_-]+/g)
+return new Promise((resolve, reject) => {
+  const openUrl = {
+    url: `https://url.cn/Wv7ja1sY?${ID}&qimei=5b5cbdb2-8afc-4354-ab93-03e3717abd9f&uid=100208136356`,
+    headers: {Cookie: cookieVal},
+  }
+   sy.get(openUrl, (error, response, data) => {
+    //sy.log(`${cookieName}- data: ${data}`)
+      })
+    resolve()
+   })
+}
 //阶梯红包到账
 function Redpack() {
    ID = signurlVal.match(/devid=[a-zA-Z0-9_-]+/g)
@@ -352,7 +365,7 @@ function init() {
       if (isSurge()) $notification.post(title, subtitle, body)
       if (isQuanX()) $notify(title, subtitle, body)
     }
-    log = (message) => console.log(message)
+    log = (message) => console.log(message+'\n')
     get = (url, cb) => {
       if (isSurge()) {
         $httpClient.get(url, cb)

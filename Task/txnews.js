@@ -73,6 +73,7 @@ async function all()
   await toRead();
   await lookVideo();
   await openApp();
+  await shareApp();
   await StepsTotal();
   await StepsTotal2();
   await RednumCheck();
@@ -153,7 +154,19 @@ function lookVideo() {
    })
  }
 
-
+function shareApp() {
+  ID = signurlVal.match(/devid=[a-zA-Z0-9_-]+/g)
+return new Promise((resolve, reject) => {
+  const shareUrl = {
+    url: `https://url.cn/gaYNDrRV?${ID}&uid=543676667&from=singlemessage&isappinstalled=0`,
+    headers: {Cookie: cookieVal},
+  }
+   sy.get(shareUrl, (error, response, data) => {
+    //sy.log(`${cookieName}- data: ${data}`)
+      })
+    resolve()
+   })
+}
 //阅读文章统计
 function StepsTotal() {
   const ID =  signurlVal.match(/devid=[a-zA-Z0-9_-]+/g)
@@ -242,6 +255,7 @@ return new Promise((resolve, reject) => {
     resolve()
    })
 }
+
 //阶梯红包到账
 function Redpack() {
    ID = signurlVal.match(/devid=[a-zA-Z0-9_-]+/g)
